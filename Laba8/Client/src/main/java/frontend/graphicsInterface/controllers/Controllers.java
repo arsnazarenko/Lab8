@@ -37,8 +37,9 @@ public class Controllers {
         this.locale = locale;
         collection = new Collection();
         organizationCreateController = new OrganizationController(new OrganizationView(), new ObjectCreatorUI(new ObjectDataValidator()), clientManager);
-        ObjectsMapModel mapModel = new ObjectsMapModel(new ArrayDeque<>());
-        mapController = new ObjectsMapController(new ObjectsMapView(mapModel.getOrganizationsCoordinateInfo(), mapModel.getCellSize(), mapModel.getCellCount()), mapModel,collection);
+        ObjectsMapModel mapModel = new ObjectsMapModel(20);
+        ObjectsMapModel.Entity entity =  mapModel.generateIcons(new ArrayDeque<>());
+        mapController = new ObjectsMapController(new ObjectsMapView(mapModel.getCellSize(), entity.getCellCount()),mapModel);
         logInController = new LogInController(logInWindow, clientManager, mapController.getView());
         commandsController = new CommandsController(clientManager, organizationCreateController, mapController);
         windowController = new WindowController();
@@ -46,7 +47,7 @@ public class Controllers {
         listeners.add(logInWindow);
         listeners.add(logInWindow.getAuthorizationPanel());
         listeners.add(logInWindow.getRegistrationPanel());
-        listeners.add(mapController.getView());
+//        listeners.add(mapController.getView());
         listeners.add(organizationCreateController.getView());
     }
 

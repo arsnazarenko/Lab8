@@ -2,27 +2,93 @@ package frontend.objectWindows;
 
 import library.сlassModel.Organization;
 
-import java.awt.*;
-import java.util.AbstractMap;
+import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ObjectsMapModel {
-    private final Deque<Organization> organizations;
-    private Map<Organization, Map.Entry<Integer, Point>> organizationsCoordinateInfo;
-    private int offset;
-    private int cellCount;
-    private final int CELL_SIZE = 15;
+    private final int CELL_SIZE;
+    private Deque<Organization> oldOrg = new ArrayDeque<>();
+    private Deque<Organization> newOrg = new ArrayDeque<>();
 
 
-    public ObjectsMapModel(Deque<Organization> organizations) {
-        this.organizations = organizations;
-        this.offset = calcOffset(organizations);
-        this.cellCount = offset * 2;
-        this.organizationsCoordinateInfo = calcCoordinate(organizations);
+    public void setNewOrganization(Deque<Organization> organization) {
+        this.oldOrg = this.newOrg;
+        this.newOrg = organization;
     }
+
+
+
+    public Deque<Organization> getOldOrg() {
+        return oldOrg;
+    }
+
+    public Deque<Organization> getNewOrg() {
+        return newOrg;
+    }
+
+    public static class Entity {
+        private int offset;
+        private int cellCount;
+        private Deque<Icon> icons;
+
+        public Entity(int offset, int cellCount, Deque<Icon> icons) {
+            this.offset = offset;
+            this.cellCount = cellCount;
+            this.icons = icons;
+        }
+
+        public int getOffset() {
+            return offset;
+        }
+
+        public void setOffset(int offset) {
+            this.offset = offset;
+        }
+
+        public int getCellCount() {
+            return cellCount;
+        }
+
+        public void setCellCount(int cellCount) {
+            this.cellCount = cellCount;
+        }
+
+        public Deque<Icon> getIcons() {
+            return icons;
+        }
+
+        public void setIcons(Deque<Icon> icons) {
+            this.icons = icons;
+        }
+    }
+
+
+    public ObjectsMapModel(int CELL_SIZE) {
+        this.CELL_SIZE = CELL_SIZE;
+    }
+
+
+    public Entity generateIcons(Deque<Organization> organizations) {
+        int offset = calcOffset(organizations);
+
+        int cellCount = offset * 2;
+
+        Deque<Icon> icons = calcCoordinate(organizations, offset, cellCount);
+
+        return new Entity(offset, cellCount, icons);
+
+    }
+
+    public Entity generateIcons(int offset, Deque<Organization> organizations) {
+        int cellCount = offset * 2;
+        Deque<Icon> icons = calcCoordinate(organizations, offset, cellCount);
+        return new Entity(offset, cellCount, icons);
+    }
+
+
+
 
 
 
@@ -36,30 +102,18 @@ public class ObjectsMapModel {
                 orElse(56) + 4;
     }
 
-    private Map<Organization, Map.Entry<Integer, Point>> calcCoordinate(Deque<Organization> organizations) {
-        return organizations.stream().collect(Collectors.
-                toMap(o -> o, // id
-                        o -> new AbstractMap.SimpleEntry<>(Sizes.calcSize(o.getEmployeesCount()).getSizeValue(), //size
-                                new Point((int) Math.round((o.getCoordinates().getX()) + offset) * CELL_SIZE, //x
-                                        (cellCount - (Math.round(o.getCoordinates().getY()) + offset)) * CELL_SIZE)))); //y
+
+    private Deque<Icon> calcCoordinate(Deque<Organization> organizations, int offset, int cellCount) {
+        return organizations.stream().map(o -> new Icon(o.getId(), ColorGenerator.generate(o.getUserLogin()), Sizes.calcSize(o.getEmployeesCount()).getSizeValue(), (int) Math.round((o.getCoordinates().getX()) + offset) * CELL_SIZE,
+                (cellCount  - (Math.round(o.getCoordinates().getY()) + offset)) * CELL_SIZE)).collect(Collectors.toCollection(ArrayDeque::new));
     }
 
-    public void setOrganizationsCoordinateInfo(Map<Organization, Map.Entry<Integer, Point>> organizationsCoordinateInfo) {
-        this.organizationsCoordinateInfo = organizationsCoordinateInfo;
-    }
 
-    public int getCellCount() {
-        return cellCount;
-    }
+
+
 
     public int getCellSize() {
         return CELL_SIZE;
     }
-    public Deque<Organization> getOrganizations() {
-        return organizations;
-    }
 
-    public Map<Organization, Map.Entry<Integer, Point>> getOrganizationsCoordinateInfo() {
-        return organizationsCoordinateInfo;
-    }
 }

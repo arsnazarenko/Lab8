@@ -1,13 +1,15 @@
 package frontend.objectWindows;
 
+import java.awt.*;
+
 public enum Sizes {
-    S(2),
-    M(3),
-    L(4);
 
-    private Integer size;
+    S(new Dimension(8, 20)),
+    M(new Dimension(16, 40)),
+    L(new Dimension(24, 60));
 
-    Sizes(int size) {
+    private Dimension size;
+    Sizes(Dimension size) {
         this.size = size;
     }
 
@@ -21,7 +23,7 @@ public enum Sizes {
         }
     }
 
-    public Integer getSizeValue() {
+    public Dimension getSizeValue() {
         return size;
     }
 }

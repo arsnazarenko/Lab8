@@ -37,13 +37,13 @@ public class Test {
                 new Organization("sena", 14L, "adw", new Coordinates(66, 55), new Date(), 12, OrganizationType.COMMERCIAL, 12313d, null),
                 new Organization("sena8980990", 15L, "adw", new Coordinates(0, 100), new Date(), 1230, OrganizationType.COMMERCIAL, 12313d, null)
         ));
-        SwingUtilities.invokeLater(() -> {
-            ObjectsMapModel model = new ObjectsMapModel(organizations);
-            int size = model.getCellSize();
-            int count = model.getCellCount();
-            ObjectsMapController controller = new ObjectsMapController(new ObjectsMapView(model.getOrganizationsCoordinateInfo(),
-                    size, count), model,new Collection());
-        });
+//        SwingUtilities.invokeLater(() -> {
+//            ObjectsMapModel model = new ObjectsMapModel(organizations);
+//            int size = model.getCellSize();
+//            int count = model.getCellCount();
+//            ObjectsMapController controller = new ObjectsMapController(new ObjectsMapView(model.getOrganizationsCoordinateInfo(),
+//                    size, count), model,new Collection());
+//        });
 
 
 

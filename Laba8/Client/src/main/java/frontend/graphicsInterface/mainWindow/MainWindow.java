@@ -72,7 +72,7 @@ public class MainWindow extends JFrame implements LocaleActionListener {
     private void createTabbedPane(){
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab(null,tablePanel);
-        ObjectsMapModel model = new ObjectsMapModel(new ArrayDeque<>());
+        ObjectsMapModel model = new ObjectsMapModel(20);
         tabbedPane.addTab(null, mapView);
         tabbedPane.setBackground(Color.WHITE);
         tabbedPane.setFont(new Font(FONT, Font.PLAIN, 12));}
