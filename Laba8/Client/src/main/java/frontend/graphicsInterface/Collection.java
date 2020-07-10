@@ -82,12 +82,15 @@ public class Collection {
         builder.append(bundle.getString("org")).append("{");
         builder.append("id").append("=").append("'").append(nf.format(organization.getId())).append("'").append(",");
         builder.append(bundle.getString("login")).append("=").append("'").append(organization.getUserLogin()).append("'").append(",");
+        builder.append(bundle.getString("name")).append("=").append("'").append(organization.getName()).append("'").append(",");
         builder.append(bundle.getString("coord")).append("=").append("{");
         builder.append("x").append("=").append("'").append(nf.format(organization.getCoordinates().getX())).append("'").append(",");
         builder.append("y").append("=").append("'").append(nf.format(organization.getCoordinates().getY())).append("'").append(",").append("}");
         builder.append(bundle.getString("creation_Date")).append("=").append("'").append(df.format(organization.getCreationDate())).append("'").append(",");
+        builder.append(bundle.getString("employees")).append("=").append("'").append(organization.getEmployeesCount()).append("'").append(",");
         builder.append(bundle.getString("type")).append("=").append("'").append(organization.getType()).append("'").append(",");
-        builder.append(bundle.getString("annual_turnover")).append("=").append("'").append(nf.format(organization.getAnnualTurnover())).append("'").append(",");
+        if (organization.getAnnualTurnover() == null) builder.append(bundle.getString("annual_turnover")).append("=").append("'").append("null").append("'").append(",");
+        else builder.append(bundle.getString("annual_turnover")).append("=").append("'").append(nf.format(organization.getAnnualTurnover())).append("'").append(",");
         builder.append(bundle.getString("address")).append("=").append("{");
         Address address = organization.getOfficialAddress();
         if(address==null) builder.append("null").append("}").append("}");

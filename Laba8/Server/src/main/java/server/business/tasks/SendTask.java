@@ -13,7 +13,7 @@ import java.net.DatagramSocket;
 public class SendTask implements Runnable {
     private DatagramSocket datagramSocket;
     private LetterInfo response;
-    private final byte[] errorMessage = "Сообщение превысело допустимый формат".getBytes();
+    private final byte[] errorMessage = "Сообщение превысило допустимый формат".getBytes();
 
     final static Logger logger = LogManager.getLogger();
 

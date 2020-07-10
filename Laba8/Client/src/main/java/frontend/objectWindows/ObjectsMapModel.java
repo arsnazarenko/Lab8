@@ -31,9 +31,9 @@ public class ObjectsMapModel {
                 flatMap(o -> Stream.of(Math.round(o.getCoordinates().getX()), Math.round(o.getCoordinates().getY()))).
                 mapToInt(Number::intValue).
                 map(Math::abs).
-                filter(o -> o > 27).
+                filter(o -> o > 56).
                 max().
-                orElse(25) + 4;
+                orElse(56) + 4;
     }
 
     private Map<Organization, Map.Entry<Integer, Point>> calcCoordinate(Deque<Organization> organizations) {
