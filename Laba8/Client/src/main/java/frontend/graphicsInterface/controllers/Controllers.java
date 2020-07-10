@@ -28,6 +28,7 @@ public class Controllers {
     private WindowController windowController;
     private List<LocaleActionListener> listeners = new ArrayList<>();
     private OrganizationController organizationCreateController;
+    private OrganizationController organizationCreateControllerForMap;
     private ObjectsMapController mapController;
     private Collection collection;
 
@@ -37,7 +38,8 @@ public class Controllers {
         this.locale = locale;
         collection = new Collection();
         organizationCreateController = new OrganizationController(new OrganizationView(), new ObjectCreatorUI(new ObjectDataValidator()), clientManager);
-        ObjectsMapModel mapModel = new ObjectsMapModel(20);
+        organizationCreateControllerForMap = new OrganizationController(new OrganizationView(), new ObjectCreatorUI(new ObjectDataValidator()), clientManager);
+        ObjectsMapModel mapModel = new ObjectsMapModel(20, organizationCreateControllerForMap);
         ObjectsMapModel.Entity entity =  mapModel.generateIcons(new ArrayDeque<>());
         mapController = new ObjectsMapController(new ObjectsMapView(mapModel.getCellSize(), entity.getCellCount()),mapModel);
         logInController = new LogInController(logInWindow, clientManager, mapController.getView());

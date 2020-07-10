@@ -35,6 +35,10 @@ public class OrganizationController {
         view.getFrame().setVisible(true);
     }
 
+    public ClientManager getClientManager() {
+        return clientManager;
+    }
+
     public void unsetVisibleOrganizationCreator() {
         view.getFrame().setVisible(false);
     }

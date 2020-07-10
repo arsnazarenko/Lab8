@@ -12,6 +12,8 @@ public class ObjectsMapModel {
     private Deque<Organization> oldOrg = new ArrayDeque<>();
     private Deque<Organization> newOrg = new ArrayDeque<>();
 
+    private OrganizationController controller;
+
 
     public void setNewOrganization(Deque<Organization> organization) {
         this.oldOrg = this.newOrg;
@@ -65,7 +67,8 @@ public class ObjectsMapModel {
     }
 
 
-    public ObjectsMapModel(int CELL_SIZE) {
+    public ObjectsMapModel(int CELL_SIZE, OrganizationController controller) {
+        this.controller = controller;
         this.CELL_SIZE = CELL_SIZE;
     }
 
@@ -105,7 +108,7 @@ public class ObjectsMapModel {
 
     private Deque<Icon> calcCoordinate(Deque<Organization> organizations, int offset, int cellCount) {
         return organizations.stream().map(o -> new Icon(o.getId(), ColorGenerator.generate(o.getUserLogin()), Sizes.calcSize(o.getEmployeesCount()).getSizeValue(), (int) Math.round((o.getCoordinates().getX()) + offset) * CELL_SIZE,
-                (cellCount  - (Math.round(o.getCoordinates().getY()) + offset)) * CELL_SIZE)).collect(Collectors.toCollection(ArrayDeque::new));
+                (cellCount  - (Math.round(o.getCoordinates().getY()) + offset)) * CELL_SIZE, controller, this)).collect(Collectors.toCollection(ArrayDeque::new));
     }
 
 

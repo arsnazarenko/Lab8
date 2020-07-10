@@ -1,18 +1,28 @@
 package frontend.objectWindows;
 
+import frontend.ClientManager;
+import library.clientCommands.commandType.RemoveIdCommand;
+import library.clientCommands.commandType.UpdateIdCommand;
+import library.сlassModel.Organization;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Deque;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Icon extends JComponent implements ActionListener {
     private final Long id;
     private Color color;
-    private final Timer timer = new Timer(100, this);
+    private final Timer timer = new Timer(35, this);
 
+    private OrganizationController controller;
+    private ObjectsMapModel model;
 
     private int tmpX;
     private int tmpY;
@@ -26,8 +36,10 @@ public class Icon extends JComponent implements ActionListener {
 
     // параметы - цвет и нужно ли зарисовывать всю область
 
-    public Icon(Long id, Color color, Dimension size, int startX, int startY) {
+    public Icon(Long id, Color color, Dimension size, int startX, int startY, OrganizationController organizationController, ObjectsMapModel model) {
         this.id = id;
+        this.model = model;
+        this.controller = organizationController;
         this.color = color;
         setSize(size);
         this.startX = startX;
@@ -35,10 +47,25 @@ public class Icon extends JComponent implements ActionListener {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println(id);
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    controller.setIdForUpdate(id);
+                    controller.runCreation(UpdateIdCommand.class);
+                } else if(SwingUtilities.isLeftMouseButton(e)) {
+                    ClientManager cl = controller.getClientManager();
+                    cl.executeCommand(new RemoveIdCommand(id, cl.getUserData()));
+                }
+
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                Organization thisOrg = model.getNewOrg().stream().collect(Collectors.toMap(Organization::getId, o -> o)).get(id);
+                System.out.println("Вместо этого при наведении должно быть коллекция");
             }
         });
     }
+
+
 
     public void paintComponent(Graphics g) {
         Dimension size = getSize();
@@ -151,7 +178,7 @@ public class Icon extends JComponent implements ActionListener {
     }
 
     public Icon clone() {
-        return new Icon(id, color, getSize(), startX, startY);
+        return new Icon(id, color, getSize(), startX, startY, controller, model);
     }
 
     @Override

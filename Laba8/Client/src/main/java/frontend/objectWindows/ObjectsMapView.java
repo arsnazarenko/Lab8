@@ -133,115 +133,115 @@ public class ObjectsMapView extends JPanel {
         this.drawPanel = drawPanel;
     }
 
-    public static void main(String[] args) {
-
-        Deque<Organization> organizations; //вот она
-        organizations = new ArrayDeque<>(Arrays.asList(new Organization("a", 1L, "adw", new Coordinates(25, 25), new Date(), 123, OrganizationType.COMMERCIAL, 12313d, null),
-                new Organization("curry", 2L, "adw", new Coordinates(-1, -1), new Date(), 10, OrganizationType.COMMERCIAL, 12313d, null),
-                new Organization("rose", 3L, "adw", new Coordinates(15, 15), new Date(), 123, OrganizationType.COMMERCIAL, 12313d, null),
-                new Organization("iva", 4L, "adw", new Coordinates(56, 56), new Date(), 512, OrganizationType.COMMERCIAL, 12313d, null),
-                new Organization("polina", 5L, "adw", new Coordinates(23, 23), new Date(), 10, OrganizationType.COMMERCIAL, 12313d, null),
-                new Organization("polina", 6L, "adw", new Coordinates(2, 2), new Date(), 330, OrganizationType.COMMERCIAL, 12313d, null),
-                new Organization("ivan123", 7L, "adw", new Coordinates(18, 18), new Date(), 1230, OrganizationType.COMMERCIAL, 12313d, null),
-                new Organization("Zion", 8L, "adw", new Coordinates(11, 1), new Date(), 5, OrganizationType.COMMERCIAL, 12313d, null),
-                new Organization("lebron", 9L, "adw", new Coordinates(30, 25), new Date(), 12, OrganizationType.COMMERCIAL, 12313d, null),
-                new Organization("opara", 10L, "adw", new Coordinates(25, 30), new Date(), 10230, OrganizationType.COMMERCIAL, 12313d, null),
-                new Organization("kobe", 11L, "adw", new Coordinates(25, 17), new Date(), 12, OrganizationType.COMMERCIAL, 12313d, null),
-                new Organization("", 12L, "adw", new Coordinates(34, 43), new Date(), 123, OrganizationType.COMMERCIAL, 12313d, null),
-                new Organization("sena", 13L, "adw", new Coordinates(14, 90), new Date(), 6230, OrganizationType.COMMERCIAL, 12313d, null),
-                new Organization("sena", 14L, "adw", new Coordinates(66, 55), new Date(), 12, OrganizationType.COMMERCIAL, 12313d, null),
-                new Organization("sena8980990", 15L, "adw", new Coordinates(0, 100), new Date(), 1230, OrganizationType.COMMERCIAL, 12313d, null),
-                new Organization("0990", 16L, "adw", new Coordinates(0, 0), new Date(), 1230, OrganizationType.COMMERCIAL, 12313d, null)
-        ));
-
-        Deque<Organization> organizations2;
-        organizations2 = new ArrayDeque<>(Arrays.asList(organizations.getFirst(),
-                organizations.getLast()
-        ));
-
-        Deque<Organization> organizations3;
-        organizations3 = new ArrayDeque<>(Arrays.asList(organizations.getFirst(),
-                new Organization("0990", 16L, "adw", new Coordinates(10, 10), new Date(), 1, OrganizationType.COMMERCIAL, 12313d, null)
-
-        ));
-
-        Deque<Organization> organizations4;
-        organizations4 = new ArrayDeque<>(Arrays.asList(organizations.getFirst(),
-                organizations3.getLast(),
-                new Organization("0990", 15L, "adw", new Coordinates(5, 5), new Date(), 1230, OrganizationType.COMMERCIAL, 12313d, null)
-
-        ));
-        final ObjectsMapController[] c = new ObjectsMapController[1];
-        final ObjectsMapView[] view = new ObjectsMapView[1];
-        SwingUtilities.invokeLater(() -> {
-
-            ObjectsMapModel model = new ObjectsMapModel(20);
-            ObjectsMapModel.Entity entity = model.generateIcons(organizations);
-            view[0] = new ObjectsMapView(model.getCellSize(), entity.getCellCount());
-            c[0] = new ObjectsMapController(view[0], model);
-            c[0].updateObjectsMapView(organizations); //загружаю полную коллекцию
-//            icons.forEach(o ->System.out.println( "x: " + o.getStartX() + " y: " + o.getStartY()  + "\n"));
+//    public static void main(String[] args) {
 //
-//            c.getView().setIcons(entity.getIcons());
-//            icons.getLast().changeLocation(2360, 280);
-        });
-
-        try {
-            TimeUnit.SECONDS.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        SwingUtilities.invokeLater(() -> {
-            c[0].updateObjectsMapView(organizations2);//потом удаляю все, кроме двух
-        });
-
-        try {
-            TimeUnit.SECONDS.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        SwingUtilities.invokeLater(() -> {
-            c[0].updateObjectsMapView(organizations3); //отом заменяю у двух размер и координату на ноль
-        });
-
-
-        try {
-            TimeUnit.SECONDS.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        SwingUtilities.invokeLater(() -> {
-            c[0].updateObjectsMapView(organizations4);//потом добавляю к ним один
-        });
-
-        try {
-            TimeUnit.SECONDS.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        SwingUtilities.invokeLater(() -> {
-            c[0].updateObjectsMapView(new ArrayDeque<>());//удаляю все
-        });
-
-        try {
-            TimeUnit.SECONDS.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        SwingUtilities.invokeLater(() -> {
-            c[0].updateObjectsMapView(organizations);//загружаю новую
-        });
-
-        try {
-            TimeUnit.SECONDS.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(Arrays.toString(c[0].getView().getDrawPanel().getComponents()));
-
-
-
-    }
+//        Deque<Organization> organizations; //вот она
+//        organizations = new ArrayDeque<>(Arrays.asList(new Organization("a", 1L, "adw", new Coordinates(25, 25), new Date(), 123, OrganizationType.COMMERCIAL, 12313d, null),
+//                new Organization("curry", 2L, "adw", new Coordinates(-1, -1), new Date(), 10, OrganizationType.COMMERCIAL, 12313d, null),
+//                new Organization("rose", 3L, "adw", new Coordinates(15, 15), new Date(), 123, OrganizationType.COMMERCIAL, 12313d, null),
+//                new Organization("iva", 4L, "adw", new Coordinates(56, 56), new Date(), 512, OrganizationType.COMMERCIAL, 12313d, null),
+//                new Organization("polina", 5L, "adw", new Coordinates(23, 23), new Date(), 10, OrganizationType.COMMERCIAL, 12313d, null),
+//                new Organization("polina", 6L, "adw", new Coordinates(2, 2), new Date(), 330, OrganizationType.COMMERCIAL, 12313d, null),
+//                new Organization("ivan123", 7L, "adw", new Coordinates(18, 18), new Date(), 1230, OrganizationType.COMMERCIAL, 12313d, null),
+//                new Organization("Zion", 8L, "adw", new Coordinates(11, 1), new Date(), 5, OrganizationType.COMMERCIAL, 12313d, null),
+//                new Organization("lebron", 9L, "adw", new Coordinates(30, 25), new Date(), 12, OrganizationType.COMMERCIAL, 12313d, null),
+//                new Organization("opara", 10L, "adw", new Coordinates(25, 30), new Date(), 10230, OrganizationType.COMMERCIAL, 12313d, null),
+//                new Organization("kobe", 11L, "adw", new Coordinates(25, 17), new Date(), 12, OrganizationType.COMMERCIAL, 12313d, null),
+//                new Organization("", 12L, "adw", new Coordinates(34, 43), new Date(), 123, OrganizationType.COMMERCIAL, 12313d, null),
+//                new Organization("sena", 13L, "adw", new Coordinates(14, 90), new Date(), 6230, OrganizationType.COMMERCIAL, 12313d, null),
+//                new Organization("sena", 14L, "adw", new Coordinates(66, 55), new Date(), 12, OrganizationType.COMMERCIAL, 12313d, null),
+//                new Organization("sena8980990", 15L, "adw", new Coordinates(0, 100), new Date(), 1230, OrganizationType.COMMERCIAL, 12313d, null),
+//                new Organization("0990", 16L, "adw", new Coordinates(0, 0), new Date(), 1230, OrganizationType.COMMERCIAL, 12313d, null)
+//        ));
+//
+//        Deque<Organization> organizations2;
+//        organizations2 = new ArrayDeque<>(Arrays.asList(organizations.getFirst(),
+//                organizations.getLast()
+//        ));
+//
+//        Deque<Organization> organizations3;
+//        organizations3 = new ArrayDeque<>(Arrays.asList(organizations.getFirst(),
+//                new Organization("0990", 16L, "adw", new Coordinates(10, 10), new Date(), 1, OrganizationType.COMMERCIAL, 12313d, null)
+//
+//        ));
+//
+//        Deque<Organization> organizations4;
+//        organizations4 = new ArrayDeque<>(Arrays.asList(organizations.getFirst(),
+//                organizations3.getLast(),
+//                new Organization("0990", 15L, "adw", new Coordinates(5, 5), new Date(), 1230, OrganizationType.COMMERCIAL, 12313d, null)
+//
+//        ));
+//        final ObjectsMapController[] c = new ObjectsMapController[1];
+//        final ObjectsMapView[] view = new ObjectsMapView[1];
+//        SwingUtilities.invokeLater(() -> {
+//
+//            ObjectsMapModel model = new ObjectsMapModel(20);
+//            ObjectsMapModel.Entity entity = model.generateIcons(organizations);
+//            view[0] = new ObjectsMapView(model.getCellSize(), entity.getCellCount());
+//            c[0] = new ObjectsMapController(view[0], model);
+//            c[0].updateObjectsMapView(organizations); //загружаю полную коллекцию
+////            icons.forEach(o ->System.out.println( "x: " + o.getStartX() + " y: " + o.getStartY()  + "\n"));
+////
+////            c.getView().setIcons(entity.getIcons());
+////            icons.getLast().changeLocation(2360, 280);
+//        });
+//
+//        try {
+//            TimeUnit.SECONDS.sleep(10);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        SwingUtilities.invokeLater(() -> {
+//            c[0].updateObjectsMapView(organizations2);//потом удаляю все, кроме двух
+//        });
+//
+//        try {
+//            TimeUnit.SECONDS.sleep(10);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        SwingUtilities.invokeLater(() -> {
+//            c[0].updateObjectsMapView(organizations3); //отом заменяю у двух размер и координату на ноль
+//        });
+//
+//
+//        try {
+//            TimeUnit.SECONDS.sleep(10);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        SwingUtilities.invokeLater(() -> {
+//            c[0].updateObjectsMapView(organizations4);//потом добавляю к ним один
+//        });
+//
+//        try {
+//            TimeUnit.SECONDS.sleep(10);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//
+//        SwingUtilities.invokeLater(() -> {
+//            c[0].updateObjectsMapView(new ArrayDeque<>());//удаляю все
+//        });
+//
+//        try {
+//            TimeUnit.SECONDS.sleep(10);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        SwingUtilities.invokeLater(() -> {
+//            c[0].updateObjectsMapView(organizations);//загружаю новую
+//        });
+//
+//        try {
+//            TimeUnit.SECONDS.sleep(10);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//
+//        System.out.println(Arrays.toString(c[0].getView().getDrawPanel().getComponents()));
+//
+//
+//
+//    }
 }
