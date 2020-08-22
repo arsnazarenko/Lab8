@@ -1,10 +1,10 @@
 package client;
 
 import client.servises.*;
-import frontend.ClientManager;
-import frontend.graphicsInterface.Menu;
-import frontend.graphicsInterface.controllers.Controllers;
-import frontend.graphicsInterface.loginForm.LogInWindow;
+import frontend2.ClientManager;
+import frontend2.graphicsInterface.Menu;
+import frontend2.graphicsInterface.controllers.Controllers;
+import frontend2.graphicsInterface.loginForm.LogInWindow;
 
 import java.util.Locale;
 

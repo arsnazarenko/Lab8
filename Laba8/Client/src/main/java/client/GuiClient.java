@@ -1,7 +1,7 @@
 package client;
 
 import client.servises.*;
-import frontend.GuiAnswerHandler;
+import frontend2.GuiAnswerHandler;
 import library.clientCommands.Command;
 import library.serialization.SerializationManager;
 
